@@ -39,7 +39,7 @@ To add a screenshot, create an `assets/images` folder in your repository and upl
   -
 
 - The URL of the GitHub repository, with a unique name and a README describing the project:
-  -
+  - .
 
 ## Credits
 
