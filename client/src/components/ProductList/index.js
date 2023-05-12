@@ -17,7 +17,7 @@ function ProductList() {
 
   //
   const dispatch = useDispatch();
-  const state = useSelector(state => state);
+  const state = useSelector(state => state.product);
 
   const { currentCategory } = state;
 

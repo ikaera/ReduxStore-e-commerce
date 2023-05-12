@@ -16,7 +16,7 @@ function ProductItem(item) {
 
   //
   const dispatch = useDispatch();
-  const state = useSelector(state => state);
+  const state = useSelector(state => state.product);
 
   const { image, name, _id, price, quantity } = item;
 

@@ -8,13 +8,16 @@ import {
 } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
 
+import { Provider } from 'react-redux';
+import store from './components/store/store';
+
 import Home from './pages/Home';
 import Detail from './pages/Detail';
 import NoMatch from './pages/NoMatch';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import Nav from './components/Nav';
-import { StoreProvider } from './utils/GlobalState';
+// import { StoreProvider } from './utils/GlobalState';
 import Success from './pages/Success';
 import OrderHistory from './pages/OrderHistory';
 
@@ -42,39 +45,18 @@ function App() {
     <ApolloProvider client={client}>
       <Router>
         <div>
-          <StoreProvider>
+          <Provider store={store}>
             <Nav />
             <Routes>
-              <Route 
-                path="/" 
-                element={<Home />} 
-              />
-              <Route 
-                path="/login" 
-                element={<Login />} 
-              />
-              <Route 
-                path="/signup" 
-                element={<Signup />} 
-              />
-              <Route 
-                path="/success" 
-                element={<Success />} 
-              />
-              <Route 
-                path="/orderHistory" 
-                element={<OrderHistory />} 
-              />
-              <Route 
-                path="/products/:id" 
-                element={<Detail />} 
-              />
-              <Route 
-                path="*" 
-                element={<NoMatch />} 
-              />
+              <Route path="/" element={<Home />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/signup" element={<Signup />} />
+              <Route path="/success" element={<Success />} />
+              <Route path="/orderHistory" element={<OrderHistory />} />
+              <Route path="/products/:id" element={<Detail />} />
+              <Route path="*" element={<NoMatch />} />
             </Routes>
-          </StoreProvider>
+          </Provider>
         </div>
       </Router>
     </ApolloProvider>

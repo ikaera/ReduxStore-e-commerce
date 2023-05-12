@@ -1,11 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit';
 import productReducer from './productSlice';
 
-export const store = configureStore({
+const store = configureStore({
   reducer: {
     product: productReducer,
   },
 });
+
+export default store;
 
 // // import { legacy_createStore } from 'redux';
 // import { configureStore, createSlice } from '@reduxjs/toolkit';

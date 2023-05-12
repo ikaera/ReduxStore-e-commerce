@@ -19,7 +19,8 @@ function CategoryMenu() {
 
   //
   const dispatch = useDispatch();
-  const state = useSelector(state => state);
+  const state = useSelector(state => state.product);
+  console.log(state);
 
   const { categories } = state;
 

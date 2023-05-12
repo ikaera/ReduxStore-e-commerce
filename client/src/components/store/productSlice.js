@@ -13,57 +13,60 @@ export const productSlice = createSlice({
   initialState,
   reducers: {
     // methods with names of our choice
-    updateProducts: (state, action) => {
-      state.products = [...action.products];
+    updateProducts: (state, { payload }) => {
+      state.products = [...payload.products];
     },
 
-    addToCart: (state, action) => {
-      (state.cartOpen = true), (state.cart = [...state.cart, action.product]);
+    addToCart: (state, { payload }) => {
+      console.log(state);
+      state.cartOpen = true;
+      state.cart = [...state.cart, payload.product];
     },
 
-    addMultipleToCart: (state, action) => {
-      state.cart = [...state.cart, ...action.products];
+    addMultipleToCart: (state, { payload }) => {
+      state.cart = [...state.cart, ...payload.products];
     },
 
-    updateCartQuantity: (state, action) => {
+    updateCartQuantity: (state, { payload }) => {
       state.cartOpen = true;
       state.cart = state.cart.map(product => {
-        if (action._id === product._id) {
-          product.purchaseQuantity = action.purchaseQuantity;
+        if (payload._id === product._id) {
+          product.purchaseQuantity = payload.purchaseQuantity;
         }
         return product;
       });
     },
 
-    removeFromCart: (state, action) => {
+    removeFromCart: (state, { payload }) => {
       let newState = state.cart.filter(product => {
-        return product._id !== action._id;
+        return product._id !== payload._id;
       });
 
       state.cartOpen = newState.length > 0;
       state.cart = newState;
     },
 
-    clearCart: (state, action) => {
+    clearCart: (state, { payload }) => {
       state.cartOpen = false;
       state.cart = [];
     },
 
-    toggleCart: (state, action) => {
+    toggleCart: (state, payload) => {
       state.cartOpen = !state.cartOpen;
     },
 
-    updateCategories: (state, action) => {
-      state.categories = [...action.categories];
+    updateCategories: (state, { payload }) => {
+      console.log(payload);
+      state.categories = [...payload.categories];
     },
 
-    updateCurrentCategory: (state, action) => {
-      state.currentCategory = action.currentCategory;
+    updateCurrentCategory: (state, { payload }) => {
+      state.currentCategory = payload.currentCategory;
     },
   },
 });
 
-// Action creators are generated for each case reducer function
+// Payload creators are generated for each case reducer function
 export const {
   updateProducts,
   addToCart,
@@ -74,6 +77,6 @@ export const {
   toggleCart,
   updateCategories,
   updateCurrentCategory,
-} = counterSlice.actions;
+} = productSlice.actions;
 
-export default counterSlice.reducer;
+export default productSlice.reducer;
