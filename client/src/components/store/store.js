@@ -1,34 +1,54 @@
-import { legacy_createStore } from 'redux';
-import { createSlice } from '@reduxjs/toolkit';
+import { configureStore } from '@reduxjs/toolkit';
+import productReducer from './productSlice';
 
-createSlice({
-  name: 'anyName',
-  initialState,
-  reducers: {
-    // methods with names of our choice
-    increment(state) {},
-    decrement() {},
+export const store = configureStore({
+  reducer: {
+    product: productReducer,
   },
 });
 
-const counterReducer = (state = { counter: 0 }, action) => {
-  if (action.type === 'increment') {
-    return {
-      counter: state.counter + 1,
-    };
-  }
+// // import { legacy_createStore } from 'redux';
+// import { configureStore, createSlice } from '@reduxjs/toolkit';
+// import reducer from '../../utils/reducers';
 
-  if (action.type === 'decrement') {
-    return {
-      counter: state.counter - 1,
-    };
-  }
-  return state;
-};
+// const initialState = {
+//   products: [],
+//   cart: [],
+//   cartOpen: false,
+//   categories: [],
+//   currentCategory: '',
+// };
 
-const store = legacy_createStore(counterReducer);
+// const counterSlice = createSlice({
+//   name: 'anyName',
+//   initialState,
+//   reducers: {},
+// });
 
-export default store;
+// const store = configureStore({
+//   reducer: { counter: counterSlice.reducer },
+// });
+
+// export const counterActions = counterSlice.actions;
+
+// export default store;
+
+// const counterReducer = (state = { counter: 0 }, action) => {
+//   if (action.type === 'increment') {
+//     return {
+//       counter: state.counter + 1,
+//     };
+//   }
+
+//   if (action.type === 'decrement') {
+//     return {
+//       counter: state.counter - 1,
+//     };
+//   }
+//   return state;
+// };
+
+// const store = legacy_createStore(counterReducer);
 
 /*
 const redux = require('redux');
