@@ -48,7 +48,7 @@ const Cart = () => {
     }
   }, [state.cart.length, dispatch]);
 
-  function toggleCart() {
+  function toggleCartFn() {
     // dispatch({ type: TOGGLE_CART });
     dispatch(toggleCart());
   }
@@ -77,7 +77,7 @@ const Cart = () => {
 
   if (!state.cartOpen) {
     return (
-      <div className="cart-closed" onClick={toggleCart}>
+      <div className="cart-closed" onClick={toggleCartFn}>
         <span role="img" aria-label="trash">
           🛒
         </span>
@@ -87,7 +87,7 @@ const Cart = () => {
 
   return (
     <div className="cart">
-      <div className="close" onClick={toggleCart}>
+      <div className="close" onClick={toggleCartFn}>
         [close]
       </div>
       <h2>Shopping Cart</h2>

@@ -22,7 +22,7 @@ function ProductItem(item) {
 
   const { cart } = state;
 
-  const addToCart = () => {
+  const addToCartFn = () => {
     const itemInCart = cart.find(cartItem => cartItem._id === _id);
     if (itemInCart) {
       // dispatch({
@@ -70,7 +70,7 @@ function ProductItem(item) {
         </div>
         <span>${price}</span>
       </div>
-      <button onClick={addToCart}>Add to cart</button>
+      <button onClick={addToCartFn}>Add to cart</button>
     </div>
   );
 }

@@ -15,7 +15,7 @@ const CartItem = ({ item }) => {
   const dispatch = useDispatch();
   // const state = useSelector(state => state.product);
 
-  const removeFromCart = item => {
+  const removeFromCartFn = item => {
     // dispatch({
     //   type: REMOVE_FROM_CART,
     //   _id: item._id,
@@ -79,7 +79,7 @@ const CartItem = ({ item }) => {
           <span
             role="img"
             aria-label="trash"
-            onClick={() => removeFromCart(item)}
+            onClick={() => removeFromCartFn(item)}
           >
             🗑️
           </span>

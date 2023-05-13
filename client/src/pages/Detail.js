@@ -40,46 +40,46 @@ function Detail() {
 
   const { products, cart } = state;
 
-  useEffect(() => {
-    // already in global store
-    if (products.length) {
-      setCurrentProduct(products.find(product => product._id === id));
-    }
-    // retrieved from server
-    else if (data) {
+  // useEffect(() => {
+  // already in global store
+  if (products.length) {
+    setCurrentProduct(products.find(product => product._id === id));
+  }
+  // retrieved from server
+  else if (data) {
+    // dispatch({
+    //   type: UPDATE_PRODUCTS,
+    //   products: data.products,
+    // });
+
+    //
+    dispatch(
+      updateProducts({
+        products: data.products,
+      }),
+    );
+
+    data.products.forEach(product => {
+      idbPromise('products', 'put', product);
+    });
+  }
+  // get cache from idb
+  else if (!loading) {
+    idbPromise('products', 'get').then(indexedProducts => {
       // dispatch({
       //   type: UPDATE_PRODUCTS,
-      //   products: data.products,
+      //   products: indexedProducts,
       // });
 
       //
       dispatch(
         updateProducts({
-          products: data.products,
+          products: indexedProducts,
         }),
       );
-
-      data.products.forEach(product => {
-        idbPromise('products', 'put', product);
-      });
-    }
-    // get cache from idb
-    else if (!loading) {
-      idbPromise('products', 'get').then(indexedProducts => {
-        // dispatch({
-        //   type: UPDATE_PRODUCTS,
-        //   products: indexedProducts,
-        // });
-
-        //
-        dispatch(
-          updateProducts({
-            products: indexedProducts,
-          }),
-        );
-      });
-    }
-  }, [products, data, loading, dispatch, id]);
+    });
+  }
+  // }, [products, data, loading, dispatch, id]);
 
   const addToCart = () => {
     const itemInCart = cart.find(cartItem => cartItem._id === id);
@@ -117,7 +117,7 @@ function Detail() {
     }
   };
 
-  const removeFromCart = () => {
+  const removeFromCartFn = () => {
     // dispatch({
     //   type: REMOVE_FROM_CART,
     //   _id: currentProduct._id,
@@ -146,7 +146,7 @@ function Detail() {
             <button onClick={addToCart}>Add to Cart</button>
             <button
               disabled={!cart.find(p => p._id === currentProduct._id)}
-              onClick={removeFromCart}
+              onClick={removeFromCartFn}
             >
               Remove from Cart
             </button>
