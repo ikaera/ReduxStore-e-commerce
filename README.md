@@ -60,7 +60,7 @@ Screenshots:
 
 - The URL of the functional, deployed application:
 
-  -
+  - https://agile-spire-10872.herokuapp.com/
 
 - The URL of the GitHub repository, with a unique name and a README describing the project:
   - https://github.com/ikaera/ReduxStore-e-commerce
