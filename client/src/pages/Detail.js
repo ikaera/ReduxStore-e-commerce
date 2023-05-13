@@ -40,46 +40,46 @@ function Detail() {
 
   const { products, cart } = state;
 
-  // useEffect(() => {
-  // already in global store
-  if (products.length) {
-    setCurrentProduct(products.find(product => product._id === id));
-  }
-  // retrieved from server
-  else if (data) {
-    // dispatch({
-    //   type: UPDATE_PRODUCTS,
-    //   products: data.products,
-    // });
-
-    //
-    dispatch(
-      updateProducts({
-        products: data.products,
-      }),
-    );
-
-    data.products.forEach(product => {
-      idbPromise('products', 'put', product);
-    });
-  }
-  // get cache from idb
-  else if (!loading) {
-    idbPromise('products', 'get').then(indexedProducts => {
+  useEffect(() => {
+    // already in global store
+    if (products.length) {
+      setCurrentProduct(products.find(product => product._id === id));
+    }
+    // retrieved from server
+    else if (data) {
       // dispatch({
       //   type: UPDATE_PRODUCTS,
-      //   products: indexedProducts,
+      //   products: data.products,
       // });
 
       //
       dispatch(
         updateProducts({
-          products: indexedProducts,
+          products: data.products,
         }),
       );
-    });
-  }
-  // }, [products, data, loading, dispatch, id]);
+
+      data.products.forEach(product => {
+        idbPromise('products', 'put', product);
+      });
+    }
+    // get cache from idb
+    else if (!loading) {
+      idbPromise('products', 'get').then(indexedProducts => {
+        // dispatch({
+        //   type: UPDATE_PRODUCTS,
+        //   products: indexedProducts,
+        // });
+
+        //
+        dispatch(
+          updateProducts({
+            products: indexedProducts,
+          }),
+        );
+      });
+    }
+  }, [products, data, loading, dispatch, id]);
 
   const addToCart = () => {
     const itemInCart = cart.find(cartItem => cartItem._id === id);
