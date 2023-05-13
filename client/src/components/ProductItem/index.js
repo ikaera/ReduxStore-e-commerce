@@ -49,7 +49,11 @@ function ProductItem(item) {
       // });
 
       //
-      dispatch(addToCart({ product: { ...item, purchaseQuantity: 1 } }));
+      dispatch(
+        addToCart({
+          product: { ...item, purchaseQuantity: 1 },
+        }),
+      );
       idbPromise('cart', 'put', { ...item, purchaseQuantity: 1 });
     }
   };

@@ -35,7 +35,11 @@ const CartItem = ({ item }) => {
       // });
 
       //
-      dispatch(removeFromCart({ _id: item._id }));
+      dispatch(
+        removeFromCart({
+          _id: item._id,
+        }),
+      );
       idbPromise('cart', 'delete', { ...item });
     } else {
       // dispatch({
